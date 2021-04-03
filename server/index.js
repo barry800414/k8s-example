@@ -1,11 +1,12 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const http = require('http');
+const os = require('os');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+console.log("server starting...");
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+const handler = function(request, response) {
+  console.log("Received request from " + request.connection.remoteAddress); 
+  response.writeHead(200);
+  response.end("You've hit " + os.hostname() + "\n");
+};
+const www = http.createServer(handler);
+www.listen(8080);
