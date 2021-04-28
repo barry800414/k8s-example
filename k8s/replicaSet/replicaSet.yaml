@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: never-die-app
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo-server
+  template:
+    metadata:
+      name: demo-server
+      labels:
+        app: demo-server
+    spec:
+      containers:
+        - name: demo-server
+          image: barry800414/demo-server
+          ports:
+            - containerPort: 8080
+              name: server-port      
