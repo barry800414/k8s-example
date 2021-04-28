@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barry-mysql-demo-deployment
+  namespace: aiqua
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barry-mysql-demo
+  template:
+    metadata:
+      name: barry-mysql-demo
+      labels:
+        app: barry-mysql-demo
+    spec:
+      containers:
+        - name: barry-mysql-demo
+          image: mysql:5.6
+          ports:
+            - name: mysql-port
+              containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-volume
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: barry-mysql-demo-secret
+                  key: db-root-password
+      volumes:
+        - name: mysql-volume
+          persistentVolumeClaim:
+            claimName: barry-mysql-demo-pvc-2
