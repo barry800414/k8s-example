@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-demo-pvc
+  name: mysql-demo-pvc-3
 spec:
   resources:
     requests:
