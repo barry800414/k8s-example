@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: barry-mysql-demo-deployment
-  namespace: aiqua
 spec:
   replicas: 1
   selector:
@@ -32,4 +31,4 @@ spec:
       volumes:
         - name: mysql-volume
           persistentVolumeClaim:
-            claimName: barry-mysql-demo-pvc-2
+            claimName: mysql-demo-pvc
